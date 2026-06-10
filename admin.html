@@ -758,8 +758,15 @@
             password: pw,
           });
 
+          const errEl = document.getElementById("login-error");
           if (error) {
-            document.getElementById("login-error").classList.remove("hidden");
+            console.error("Login error:", error);
+            const msg = error.message === "Invalid login credentials" ? "E-mail ou senha incorretos." : "Erro: " + error.message;
+            errEl.innerText = msg;
+            errEl.classList.remove("hidden");
+            errEl.classList.replace("bg-green-500/10", "bg-danger/10");
+            errEl.classList.replace("border-l-green-500", "border-l-danger");
+            errEl.classList.replace("text-green-500", "text-danger");
             return;
           }
 
